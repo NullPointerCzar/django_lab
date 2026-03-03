@@ -1,13 +1,10 @@
-<h2>Notes</h2>
+<h2>Create Note</h2>
 
-<a href="/notes/create/">Add Note</a>
+<form method="POST">
+  {% csrf_token %}
+  Title: <input type="text" name="title" /><br />
+  Content: <textarea name="content"></textarea><br />
+  <button type="submit">Save</button>
+</form>
 
-<ul>
-  {% for note in notes %}
-  <li>
-    {{ note.title }}
-    <a href="/notes/update/{{ note.id }}/">Edit</a>
-    <a href="/notes/delete/{{ note.id }}/">Delete</a>
-  </li>
-  {% endfor %}
-</ul>
+<a href="/notes/">Back to Notes</a>

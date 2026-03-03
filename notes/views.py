@@ -27,5 +27,7 @@ def note_update(request, id):
 
 def note_delete(request, id):
     note = get_object_or_404(Note, id=id)
-    note.delete()
-    return redirect("note_list")
+    if request.method == "POST":
+        note.delete()
+        return redirect("note_list")
+    return render(request, "notes/note_delete.html", {"note": note})
