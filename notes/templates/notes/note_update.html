@@ -1,0 +1,8 @@
+<h2>Update Note</h2>
+
+<form method="POST">
+  {% csrf_token %} Title:
+  <input type="text" name="title" value="{{ note.title }}" /><br />
+  Content: <textarea name="content">{{ note.content }}</textarea><br />
+  <button type="submit">Update</button>
+</form>
