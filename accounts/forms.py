@@ -18,14 +18,19 @@ class UserProfileForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput,
             'dob': forms.DateInput(attrs={'placeholder': 'YYYY-MM-DD', 'type': 'date'}),
+            'appointment': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Mandatory fields
         for field in ['name', 'mobile', 'doctor_name', 'gender', 'dob',
-                      'patient_id', 'email', 'file']:
+                      'patient_id', 'email', 'file', 'appointment']:
             self.fields[field].required = True
+
+        # when editing, datetime-local widget expects value in YYYY-MM-DDTHH:MM
+        if self.instance and self.instance.appointment:
+            self.fields['appointment'].initial = self.instance.appointment.strftime('%Y-%m-%dT%H:%M')
 
     # ------------------------------------------------------------------ #
     # Field-level validators

@@ -1,7 +1,11 @@
 <h2>User Form</h2>
 
 <form method="POST" enctype="multipart/form-data">
-  {% csrf_token %} {{ form.as_p }}
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <p><small>Appointment must be a future date/time (YYYY‑MM‑DD HH:MM).</small></p>
+
   <button type="submit">Submit</button>
 </form>
 
